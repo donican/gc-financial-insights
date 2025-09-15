@@ -46,3 +46,7 @@ Thumbs.db
 # ---- Secrets / Credenciais ----
 *.json
 application_default_credentials.json
+
+
+# ---- Others ----
+data/
