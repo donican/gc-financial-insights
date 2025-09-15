@@ -48,9 +48,6 @@ class Storage:
             buf = io.BytesIO()
             df.to_parquet(buf, index=False)
             buf.seek(0)
-            print("bucket ", bucket)
-            print("base ", base)
-            print("blob_path ", blob_path)
             self._gcs_client.bucket(bucket).blob(blob_path).upload_from_file(buf, content_type="application/octet-stream")
         else:
             full = os.path.join(self.output_uri, path)
@@ -61,7 +58,8 @@ class Storage:
         try:
             if _is_gcs(self.output_uri):
                 bucket, base = _split_gs(self.output_uri)
-                blob_path = f"{base.rstrip('/')}/{path.lstrip('/')}"
+                prefix = f"{base.strip('/')}/" if base else ""
+                blob_path = f"{prefix}{path.lstrip('/')}"
                 blob = self._gcs_client.bucket(bucket).blob(blob_path)
                 if not blob.exists():
                     return None
@@ -78,7 +76,8 @@ class Storage:
     def write_json(self, obj: dict, path: str):
         if _is_gcs(self.output_uri):
             bucket, base = _split_gs(self.output_uri)
-            blob_path = f"{base.rstrip('/')}/{path.lstrip('/')}"
+            prefix = f"{base.strip('/')}/" if base else ""
+            blob_path = f"{prefix}{path.lstrip('/')}"
             self._gcs_client.bucket(bucket).blob(blob_path).upload_from_string(
                 json.dumps(obj, ensure_ascii=False), content_type="application/json"
             )

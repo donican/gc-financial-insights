@@ -17,9 +17,9 @@ services:
     command: ["python", "-m", "ingestion.app.run_prices"]
     volumes:
       # para saída local em ./data
-      - ./ingestion/data:/app/data
+      # - ./ingestion/data:/app/data
       # monte a credencial se for usar SA JSON (opcional)
-      # - ./secrets/sa.json:/secrets/sa.json:ro
+      - ./secrets/sa.json:/secrets/sa.json:ro
       # para usar ADC do host (gcloud), monte a pasta de credenciais (opcional)
       # - ${APPDATA}/gcloud:/home/appuser/.config/gcloud:ro
     restart: "no"
