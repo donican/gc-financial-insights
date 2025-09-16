@@ -1,0 +1,10 @@
+{
+  "prices": {
+    "valid_close": "close IS NOT NULL AND close >= 0",
+    "valid_volume": "volume IS NULL OR volume >= 0",
+    "valid_range": "high >= low AND high >= open AND high >= close AND low <= open AND low <= close"
+  },
+  "earnings": {
+    "has_eps": "eps_act IS NOT NULL OR eps_est IS NOT NULL"
+  }
+}

@@ -44,7 +44,7 @@ Thumbs.db
 .idea/
 
 # ---- Secrets / Credenciais ----
-*.json
+secrets/*.json
 application_default_credentials.json
 
 
