@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  prices:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gcfi/ingestion:latest
+    env_file: .env
+    environment:
+      # permite sobrescrever por linha de comando
+      - OUTPUT_URI=${OUTPUT_URI}
+      - TICKERS=${TICKERS}
+      - HORIZON_DAYS=${HORIZON_DAYS}
+      - PRICES_PREFIX=${PRICES_PREFIX}
+      - MANIFEST_PREFIX=${MANIFEST_PREFIX}
+    command: ["python", "-m", "ingestion.app.run_prices"]
+    volumes:
+      # para saída local em ./data
+      # - ./ingestion/data:/app/data
+      # monte a credencial se for usar SA JSON (opcional)
+      - ./secrets/sa.json:/secrets/sa.json:ro
+      # para usar ADC do host (gcloud), monte a pasta de credenciais (opcional)
+      # - ${APPDATA}/gcloud:/home/appuser/.config/gcloud:ro
+    restart: "no"

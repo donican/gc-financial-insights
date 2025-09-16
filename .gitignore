@@ -1,0 +1,52 @@
+# ---- Terraform ----
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.tfvars
+*.tfvars.json
+
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.db
+*.egg-info/
+.venv/
+.env
+.envrc
+*.log
+
+# ---- Jupyter / Databricks ----
+.ipynb_checkpoints/
+*.dbc
+*.dbml
+*.dbc_archive
+
+# ---- Docker ----
+*.pid
+*.seed
+*.swp
+*.bak
+*.tmp
+
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Secrets / Credenciais ----
+secrets/*.json
+application_default_credentials.json
+
+
+# ---- Others ----
+data/
