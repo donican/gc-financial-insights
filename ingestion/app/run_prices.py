@@ -5,10 +5,11 @@ from .validators import validate_prices
 from .yahoo import download_prices
 
 def _manifest_key(kind: str, ticker: str) -> str:
-    return f"{MANIFEST_PREFIX.strip('/')}/{kind}/{ticker}.json"
+    return f"{MANIFEST_PREFIX}/{kind}/{ticker}.json"
 
 def main():
     store = Storage(OUTPUT_URI)
+    print(store)
     end = dt.date.today()
     start_default = end - dt.timedelta(days=HORIZON_DAYS)
 
@@ -24,6 +25,7 @@ def main():
 
         load_date = end.isoformat()
         path = f"{PRICES_PREFIX}/{t}/{load_date}_prices.parquet"
+        print(path)
         store.write_parquet(df, path)
 
         last_date = max(df["date"]).isoformat()
